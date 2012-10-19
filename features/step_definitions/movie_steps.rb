@@ -40,13 +40,16 @@ When /I (un)?check the following ratings: (.*)/ do |uncheck, rating_list|
   end
 end
 
-
 Given /^I submit the search form on the homepage$/ do
   click_button "ratings_submit"
 end
 
-Then /^I should see movies with the following movies:$/ do |table|
-  table.hashes.each do |movie|
-    assert movie["rating"].match(/R|PG/)
-  end
+Then /^I should see movies with the folowing ratings: (.*)$/ do
+  ratings = ratings_list.split(',')
 end
+
+Then /^I should not see movies with the following ratings: PG\-(\d+),G$/ do |arg1|
+  pending # express the regexp above with the code you wish you had
+end
+
+
