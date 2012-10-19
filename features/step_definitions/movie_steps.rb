@@ -28,4 +28,19 @@ When /I (un)?check the following ratings: (.*)/ do |uncheck, rating_list|
   # HINT: use String#split to split up the rating_list, then
   #   iterate over the ratings and reuse the "When I check..." or
   #   "When I uncheck..." steps in lines 89-95 of web_steps.rb
+  ratings = rating_list.split(',')
+  if uncheck 
+    ratings.each do |rating|
+      uncheck("ratings_#{rating}")
+    end
+  else
+    ratings.each do |rating|
+      check("ratings_#{rating}")
+    end
+  end
+end
+
+
+Given /^I submit the search form on the homepage$/ do
+  click_button "ratings_submit"
 end
