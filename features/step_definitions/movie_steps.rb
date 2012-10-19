@@ -44,3 +44,9 @@ end
 Given /^I submit the search form on the homepage$/ do
   click_button "ratings_submit"
 end
+
+Then /^I should see movies with the following movies:$/ do |table|
+  table.hashes.each do |movie|
+    assert movie["rating"].match(/R|PG/)
+  end
+end

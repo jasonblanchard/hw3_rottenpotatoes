@@ -30,8 +30,15 @@ Scenario: restrict to movies with 'PG' or 'R' ratings
   Given I check the following ratings: PG,R
   And I uncheck the following ratings: PG-13,G
   And I submit the search form on the homepage
-  Then I should see only PG and R movies
-  And I should not see PG-13 or G movies
+  Then I should see movies with the following movies:
+  | title                   | rating | release_date |
+  | The Terminator          | R      | 26-Oct-1984  |
+  | When Harry Met Sally    | R      | 21-Jul-1989  |
+  | Amelie                  | R      | 25-Apr-2001  |
+  | The Incredibles         | PG     | 5-Nov-2004   |
+  | Raiders of the Lost Ark | PG     | 12-Jun-1981  |
+    
+  And I should not see movies with the following ratings: PG-13,R
 
 Scenario: no ratings selected
   # see assignment
