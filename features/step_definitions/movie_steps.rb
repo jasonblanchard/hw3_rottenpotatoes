@@ -44,8 +44,9 @@ Given /^I submit the search form on the homepage$/ do
   click_button "ratings_submit"
 end
 
-Then /^I should see movies with the folowing ratings: (.*)$/ do
+Then /^I should see movies with the folowing ratings: (.*)$/ do |ratings_list|
   ratings = ratings_list.split(',')
+  page.body
 end
 
 Then /^I should not see movies with the following ratings: PG\-(\d+),G$/ do |arg1|
