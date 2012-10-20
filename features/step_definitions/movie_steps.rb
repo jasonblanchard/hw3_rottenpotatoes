@@ -46,7 +46,7 @@ end
 
 Then /^I should see movies with the folowing ratings: (.*)$/ do |ratings_list|
   ratings = ratings_list.split(',')
-  page.body
+  puts something = find(:css, "table#movies").children[0]
 end
 
 Then /^I should not see movies with the following ratings: PG\-(\d+),G$/ do |arg1|
