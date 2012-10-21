@@ -8,6 +8,7 @@ Given /the following movies exist/ do |movies_table|
     m.title = movie["title"]
     m.rating = movie["rating"]
     m.release_date = movie["release_date"]
+    m.save
   end
 end
 
@@ -44,13 +45,21 @@ Given /^I submit the search form on the homepage$/ do
   click_button "ratings_submit"
 end
 
-Then /^I should see movies with the folowing ratings: (.*)$/ do |ratings_list|
-  ratings = ratings_list.split(',')
-  puts something = find(:css, "table#movies").children[0]
+Then /^I should see the following movies:$/ do |table|
+  table.hashes.each do |movie|
+    assert page.has_content?(movie["title"])
+  end
 end
 
-Then /^I should not see movies with the following ratings: PG\-(\d+),G$/ do |arg1|
-  pending # express the regexp above with the code you wish you had
+Then /^I should not see the following movies:$/ do |table|
+  table.hashes.each do |movie|
+    assert !page.has_content?(movie["title"])
+  end
+end
+
+Then /^I should see all moves$/ do
+  #puts page.find(:css,"table#movies").find(:css,"tr").inspect
+  assert page.all('table#movies tr').size == 11
 end
 
 
