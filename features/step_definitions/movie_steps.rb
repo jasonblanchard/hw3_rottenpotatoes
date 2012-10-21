@@ -17,8 +17,9 @@ end
 
 Then /I should see "(.*)" before "(.*)"/ do |e1, e2|
   #  ensure that that e1 occurs before e2.
-  #  page.content  is the entire content of the page as a string.
-  flunk "Unimplemented"
+  #  page.content  is the entire content of the page as a string. 
+  content = page.body.split(/\<|>/)
+  assert content.index(e1) < content.index(e2)
 end
 
 # Make it easier to express checking or unchecking several boxes at once
@@ -58,7 +59,6 @@ Then /^I should not see the following movies:$/ do |table|
 end
 
 Then /^I should see all moves$/ do
-  #puts page.find(:css,"table#movies").find(:css,"tr").inspect
   assert page.all('table#movies tr').size == 11
 end
 
